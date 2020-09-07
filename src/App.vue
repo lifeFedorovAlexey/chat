@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <navigation />
+    <div class="main-container">
+      <center-container>
+        <router-view />
+      </center-container>
+    </div>
+    <!-- <sqreen-footer /> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navigation from "./components/navigation";
+import { USER_REQUEST } from "./store/actions/user";
+// import SqreenFooter from "./components/footer/index.vue";
 
 export default {
-  name: 'App',
+  name: "App",
+
+  data: function() {
+    return {};
+  },
+
   components: {
-    HelloWorld
-  }
-}
+    // SqreenFooter,
+    Navigation,
+  },
+
+  created: function() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
+    }
+  },
+  methods: {},
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
